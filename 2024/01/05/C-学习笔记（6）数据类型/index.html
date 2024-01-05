@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锐哥的个人空间 | C++学习笔记（6）数据类型</title>
+
+    
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="锐哥">
+
+    <meta name="color-scheme" content="light dark">
+
+    
+    
+<link rel="stylesheet" href="/styles/index.css">
+
+    
+    <link rel="shortcut icon" href="/imgs/logo.png">
+
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/base16/solarized-light.css">
+    
+
+    
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body id="delicate-app">
+    <main>
+        <div class="container">
+            <section class="page-top-badge flex-between w100">
+                <div>
+                    <a href="/">
+                        <span title="github"><i class="fa fa-home" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+                <!-- <div>
+                    
+                </div> -->
+            </section>
+            <aside class="toc-container">
+    <!-- sticky toc -->
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81sizeof%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.</span> <span class="toc-text">一、sizeof运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%95%B4%E5%9E%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">二、整型的基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B4%E6%95%B0%E7%9A%84%E4%B9%A6%E5%86%99"><span class="toc-number">3.</span> <span class="toc-text">三、整数的书写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-number">3.1.</span> <span class="toc-text">1. 二进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%AB%E8%BF%9B%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">2. 八进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6"><span class="toc-number">3.3.</span> <span class="toc-text">3. 十六进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9D%91"><span class="toc-number">3.4.</span> <span class="toc-text">4. 需要注意的坑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81C-11%E7%9A%84long-long%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">四、C++11的long long类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%B5%AE%E7%82%B9%E5%9E%8B%EF%BC%88%E5%AE%9E%E6%95%B0%E5%9E%8B%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">五、浮点型（实数型）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AD%97%E7%AC%A6%E5%9E%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">6.</span> <span class="toc-text">六、字符型的基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-number">7.</span> <span class="toc-text">七、转义字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81C-11%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="toc-number">8.</span> <span class="toc-text">八、C++11的原始字面量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9E%8B"><span class="toc-number">9.</span> <span class="toc-text">九、字符串型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E5%B8%83%E5%B0%94%E5%9E%8B"><span class="toc-number">10.</span> <span class="toc-text">十、布尔型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">11.</span> <span class="toc-text">十一、数据类型的转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%87%AA%E5%8A%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%9A"><span class="toc-number">11.1.</span> <span class="toc-text">1. 自动类型转换：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%9A"><span class="toc-number">11.2.</span> <span class="toc-text">2. 强制类型转换：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%88%AB%E5%90%8Dtypedef"><span class="toc-number">12.</span> <span class="toc-text">十二、数据类型的别名typedef</span></a></li></ol>
+</aside>
+
+<article class="markdown-container">
+    <section>
+        <h1>
+            <span>
+                C++学习笔记（6）数据类型
+            </span>
+        
+            <div class="post-info">
+                <span></span>
+                <span>
+                    12k字 • 
+                    24分钟
+                </span>
+            </div>
+        </h1>
+    </section>
+
+    <section class="article">
+        <h2 id="一、sizeof运算符">一、sizeof运算符</h2>
+<p>sizeof运算符用于求数据类型或变量占用的<strong>内存空间</strong>。<br>
+用于数据类型：<code>sizeof(数据类型)</code><br>
+用于变量：<code>sizeof(变量名)</code> 或 <code>sizeof 变量名</code><br>
+注意：</p>
+<ul>
+<li>在32位和64位操作系统中，同一种数据类型占用的内存空间可能不一样。</li>
+<li>字符串（string）不是C++的基本数据类型，用sizeof求它占用内存的大小没有意义。</li>
+</ul>
+<h2 id="二、整型的基本概念">二、整型的基本概念</h2>
+<p>int（integer 简写）</p>
+<p><strong>signed</strong> ：有符号的，可以表示正数和负数。<br>
+<strong>unsigned</strong> ：无符号的，只能表示正数，例如超女的身高和体重等。<br>
+<strong>short</strong> ：短的，取值范围小，占用内存少。<br>
+<strong>long</strong> ：长的，取值范围大，占用内存多。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型简写</th>
+<th style="text-align:center">类型全称</th>
+<th style="text-align:center">长度（字节）</th>
+<th style="text-align:center">取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">signed short int</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">-32768～32767</td>
+</tr>
+<tr>
+<td style="text-align:center">unsignd short</td>
+<td style="text-align:center">unsigned short int</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0~65535</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">signed int</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">-2147483648~2147483647</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned</td>
+<td style="text-align:center">unsigned int</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0~4294967295</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">signed long int</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">-9223372036854775808~9223372036854775807</td>
+</tr>
+<tr>
+<td style="text-align:center">unsigned long</td>
+<td style="text-align:center">unsigned long int</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">0~18446744073709551615</td>
+</tr>
+</tbody>
+</table>
+<p>注意：</p>
+<ul>
+<li>整数的取值范围与计算机操作系统和C++语言编译器有关，没有一个固定的数值，我们可以根据它占用的内存大小来推断它的取值范围。<br>
+a）一个字节有8个位，表示的数据的取值范围是2<sup>8</sup>-1，即255。<br>
+b）如果占用的内存是两个字节，无符号型取值范围是2<sup>8</sup>ⅹ2<sup>8</sup>-1。<br>
+c）如果占用的内存是四个字节，无符号型取值范围是2<sup>8</sup>ⅹ2<sup>8</sup>ⅹ2<sup>8</sup>ⅹ2<sup>8</sup>-1。<br>
+d）如果占用的内存是八个字节，无符号型取值范围是2<sup>8</sup>ⅹ2<sup>8</sup>ⅹ2<sup>8</sup>ⅹ2<sup>8</sup>ⅹ2<sup>8</sup>ⅹ2<sup>8</sup>ⅹ2<sup>8</sup>ⅹ2<sup>8</sup>-1。<br>
+e）如果是有符号，取值范围减半，因为符号占一个位。<br>
+f）计算机用最高位1位来表达符号（0-正数，1-负数），unsigned修饰过的正整数不需要符号位，在表达正整数的时候比signed修饰的正整数取值大一倍。</li>
+<li>给整型变量赋值不能超出它的取值范围。</li>
+</ul>
+<h2 id="三、整数的书写">三、整数的书写</h2>
+<p>整数默认是十进制，一个表示十进制的数字不需要任何特殊的格式。</p>
+<h3 id="1-二进制">1. 二进制</h3>
+<p>二进制由 0 和 1 两个数字组成，书写时必须以0b或0B（不区分大小写）开头。<br>
+如：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">0b101</span>;      <span class="comment">// 换算成十进制为 5</span></span><br><span class="line"><span class="type">int</span> b = <span class="number">-0b</span>110010;  <span class="comment">// 换算成十进制为 -50</span></span><br><span class="line"><span class="type">int</span> c = <span class="number">0B</span>100001;   <span class="comment">// 换算成十进制为 33</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-八进制">2. 八进制</h3>
+<p>八进制由 0~7 八个数字组成，书写时必须以0开头。<br>
+如：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">015</span>;      <span class="comment">// 换算成十进制为 13</span></span><br><span class="line"><span class="type">int</span> b = <span class="number">-0101</span>;    <span class="comment">// 换算成十进制为 -65</span></span><br><span class="line"><span class="type">int</span> c = <span class="number">0177777</span>;  <span class="comment">// 换算成十进制为 65535</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="3-十六进制">3. 十六进制</h3>
+<p>十六进制由数字 0~9、字母 A~F 或 a~f（不区分大小写）组成，书写时必须以0x或0X（不区分大小写）开头。<br>
+如：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">0X2A</span>;   <span class="comment">// 换算成十进制为 42</span></span><br><span class="line"><span class="type">int</span> b = <span class="number">-0XA0</span>;  <span class="comment">// 换算成十进制为 -160</span></span><br><span class="line"><span class="type">int</span> c = <span class="number">0xffff</span>;   <span class="comment">// 换算成十进制为 65535</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="4-需要注意的坑">4. 需要注意的坑</h3>
+<ul>
+<li>在C++中，不要在十进制数前面加0，会被编译器当成八进制。</li>
+<li>不要随便删掉别人程序中整数前面的0，它不是多余的。</li>
+</ul>
+<h2 id="四、C-11的long-long类型">四、C++11的long long类型</h2>
+<ul>
+<li>在VS中，long是4字节，32位。      -2147483648~2147483647</li>
+<li>在Linux中，long是8字节，64位。   -9223372036854775808~9223372036854775807</li>
+<li>C++11标准增了long long类型的整数，至少64位，且至少与long一样长。</li>
+<li>在VS中，long long是8字节，64位。 -9223372036854775808~9223372036854775807</li>
+<li>在Linux中，long和long long类型都是8字节，64位。</li>
+</ul>
+<h2 id="五、浮点型（实数型）">五、浮点型（实数型）</h2>
+<p>C++浮点型分三种：<strong>float（单精度）</strong>、<strong>double（双精度）</strong>、<strong>long double（扩展精度）</strong>。<br>
+三者的区别是表示有效数字的范围不同。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">占用空间</th>
+<th style="text-align:center">有效数字范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">4字节</td>
+<td style="text-align:center">7位有效数字   8位</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">8字节</td>
+<td style="text-align:center">15～16位有效数字   17位</td>
+</tr>
+<tr>
+<td style="text-align:center">long double</td>
+<td style="text-align:center">不少于double</td>
+<td style="text-align:center">不低于double   17位</td>
+</tr>
+</tbody>
+</table>
+<p>注意：</p>
+<ul>
+<li>
+<p>在VS和Linux中，long double占用的内存空间分别是8和16字节。</p>
+</li>
+<li>
+<p>有效数字包括了小数点前面和后面的数字。</p>
+</li>
+<li>
+<p>C++缺省显示6位有效数字，如果要显示更多的有效数字，可以用printf()函数。</p>
+</li>
+<li>
+<p>在实际开发中，用整数代替浮点数，整数的运算更快，精度更高。9223372036854775807</p>
+</li>
+</ul>
+<h2 id="六、字符型的基本概念">六、字符型的基本概念</h2>
+<p>字符型（char）占用的内存空间是<strong>1个字节</strong>，书写用单引号包含。<br>
+在内存中，不存放字符本身，而是存放与它对应的编码，即<strong>ASCII码</strong>。<br>
+字符的本质：</p>
+<ul>
+<li><strong>字符的本质是整数</strong>，取值范围是0～127。</li>
+<li>在书写的时候可以用单引号包含，也可以用整数。</li>
+<li>显示的时候，把整数解释为对应的符号，也可以直接显示整数。</li>
+<li>可以与整数进行<strong>任何运算</strong>，运算的时候，书写方式可以用字符，也可以用整数。</li>
+<li>C++为什么没有提供1字节的整型？</li>
+<li>字符型也可以用unsigned修饰，意义何在？</li>
+</ul>
+<h2 id="七、转义字符">七、转义字符</h2>
+<p>在C++程序中，使用转义字符的原因有两个：</p>
+<ul>
+<li>控制字符没有符号，无法书写，只能用其它的符号代替。</li>
+<li>某些符号已被C++征用，语义冲突，只能用其它的符号代替。</li>
+</ul>
+<h2 id="八、C-11的原始字面量">八、C++11的原始字面量</h2>
+<p>原始字面量（值）可以直接表示字符串的实际含义，不需要转义和连接。<br>
+语法：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">R"(字符串的内容)"</span></span><br><span class="line"><span class="string">R"xxx(字符串的内容)xxx"</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="九、字符串型">九、字符串型</h2>
+<ul>
+<li>C++风格字符串：<code>string 变量名="字符串的内容";</code></li>
+<li>C风格字符串：<code>char 变量名[]="字符串的内容" ;</code></li>
+<li>C风格字符串的本质是 <strong>字符数组</strong>，C++风格字符串的本质是<strong>类</strong>，它封装了C风格字符串。</li>
+<li>C++风格字符串的常用操作：
+<blockquote>
+<p><strong>赋值</strong>：<code>变量名="字符串的内容";</code><br>
+<strong>拼接</strong>：<code>变量名=变量名+"字符串的内容一"+"字符串的内容一"+......+"字符串的内容n";</code><br>
+如果字符串的内容都是常量，不要写加号（+），如果内容很长，可以分成多行书写。<br>
+<strong>比较</strong>：支持==、!=、&gt;和&lt;关系运算符，常用的是==和!=。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="十、布尔型">十、布尔型</h2>
+<p>bool类型<strong>本质上是1字节的整数</strong>（unsigned char），取值只有1和0。</p>
+<h2 id="十一、数据类型的转换">十一、数据类型的转换</h2>
+<p>计算机进行运算时，要求各操作数的类型具有相同的大小和存储方式。</p>
+<h3 id="1-自动类型转换：">1. 自动类型转换：</h3>
+<p>某些类型的转换编译器可以隐式的进行，不需程序员干预。<br>
+不同数据类型的差别在于取值范围和精度，数据的取值范围越大，精度越高。<br>
+整型从低到高：<br>
+char -&gt; short -&gt; int -&gt; long -&gt; long long<br>
+浮点型从低到高：<br>
+float -&gt; double -&gt; long double<br>
+自动类型转换的规则如下：(省流：<strong>==表达式中低转高，赋值运算右转左，遇到浮点转浮点==</strong>)</p>
+<ul>
+<li>如果一个表达式中出现了不同类型操作数的混合运算，较低类型将自动向较高类型转换。</li>
+<li>当表达式中含有浮点型操作数时，所有操作数都将转换为浮点型。</li>
+<li>赋值运算的右值类型与左值类型不一致时，将右值类型提升/降低为左值类型。</li>
+<li>赋值运算右值超出了左值类型的表示范围，把该右值截断后赋给左值，所得结果可能毫无意义。</li>
+</ul>
+<h3 id="2-强制类型转换：">2. 强制类型转换：</h3>
+<p>有些类型的转换需要程序员显式指定。<br>
+强制类型转换，也称之为显式转换。<br>
+强制类型转换的语法：<code>(目标类型)表达式</code>或<code>目标类型(表达式)</code><br>
+注意：</p>
+<ul>
+<li>类型转换运算符的优先级比较高，如果没把握就加括号。</li>
+</ul>
+<h2 id="十二、数据类型的别名typedef">十二、数据类型的别名typedef</h2>
+<p>创建数据类型的别名有两个目的：</p>
+<ul>
+<li>为名称复杂的类型创建别名，方便书写和记忆。</li>
+<li>创建与平台无关的数据类型，提高程序的兼容性。<br>
+语法：<code>typedef 原数据类型名 别名;</code><br>
+C++11还可以用using关键字创建数据类型的别名。<br>
+语法：<code>using 别名=原数据类型名;</code><br>
+例如：</li>
+</ul>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="comment">// 1）为名称复杂的类型创建别名，方便书写和记忆。</span></span><br><span class="line">	<span class="comment">// 2）创建与平台无关的数据类型，提高程序的兼容性。</span></span><br><span class="line">	<span class="comment">// 在VS中，short是两个字节，int是四个字节，long也是四个字节，long long是八个字节。</span></span><br><span class="line">	<span class="keyword">typedef</span> <span class="type">short</span>        <span class="type">int16_t</span>;    <span class="comment">// 16位的整数。</span></span><br><span class="line">	<span class="keyword">typedef</span> <span class="type">int</span>          <span class="type">int32_t</span>;    <span class="comment">// 32位的整数。</span></span><br><span class="line">	<span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span>    <span class="type">int64_t</span>;    <span class="comment">// 64位的整数。</span></span><br><span class="line">    <span class="comment">// 在Linux中，short是两个字节，int是四个字节，long也是八个字节，long long也是八个字节。</span></span><br><span class="line">	<span class="keyword">typedef</span> <span class="type">short</span>        <span class="type">int16_t</span>;    <span class="comment">// 16位的整数。</span></span><br><span class="line">	<span class="keyword">typedef</span> <span class="type">int</span>          <span class="type">int32_t</span>;    <span class="comment">// 32位的整数。</span></span><br><span class="line">	<span class="keyword">typedef</span> <span class="type">long</span>         <span class="type">int64_t</span>;    <span class="comment">// 64位的整数。</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 在程序源代码中，只使用别名int16_t、int32_t、int64_t，不使用原名。</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+    </section>
+
+    
+        <section class="post-tag">
+            <a href="/tags"><i class="fa fa-tags"></i></a>
+            
+                <a href="/tags/IT%EF%BC%8C-%E5%AD%A6%E4%B9%A0%EF%BC%8C-C/" class="tag-item">
+                    IT， 学习， C++
+                </a>
+            
+        </section>
+    
+    
+        <section class="post-cate">
+            <a href="/categories"><i class="fa fa-inbox"></i></a>
+            
+                <a href="/categories/IT%E6%8A%80%E6%9C%AF/" class="cate-item">
+                    IT技术
+                </a>
+            
+        </section>
+    
+
+    <section class="post-cc">
+        <div class="post-cc-author">
+            <span class="bold">作者：</span><a href="mailto:22232025@zju.edu.cn" title="锐哥">锐哥</a>
+        </div>
+        <div class="post-cc-link">
+            <span class="bold">链接：</span><a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">http://needrigor.github.io/2024/01/05/C-学习笔记（6）数据类型/</a>
+        </div>
+        <div class="post-cc-source">
+            <span class="bold">来源：</span><a href="/">锐哥的个人空间</a>
+        </div>
+        <div class="ppost-cc-declare">
+            <span class="bold">版权声明: </span>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> 许可协议。著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 
+        </div>
+    </section>
+
+    <section class="flex-between" style="margin: 20px 0;">
+        <div class="pre">
+            
+                <a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89%E6%8C%87%E9%92%88%E5%92%8C%E5%86%85%E5%AD%98/" class="change-link">
+                    <span class="icon"><i class="fa fa-angle-double-left"></i></span>
+                    <span class="text">
+                        <span class="identify">上一篇</span>
+                        <span class="text-title">C++学习笔记（7）指针和内存</span>
+                    </span>
+                </a>
+            
+        </div>
+        <div class="next">
+            
+                <a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80/" class="change-link">
+                    <span class="text">
+                        <span class="identify" style="text-align: right;">下一篇</span>
+                        <span class="text-title" style="text-align: right;">C++学习笔记（5）函数基础</span>
+                    </span>
+                    <span class="icon"><i class="fa fa-angle-double-right"></i></span>
+                </a>
+            
+        </div>
+    </section>
+
+    <!-- comment -->
+    <section class="comment-container">
+        <!-- giscus -->
+        
+    </section>
+</article>
+
+
+
+
+            <section class="article-bottom flex-between">
+                <div class="flex-center">
+                    <img src="/imgs/logo.png" class="logo">
+                    <span>保持好奇</span>
+                </div>
+                <div class="flex-center">
+                    <a href="mailto:22232025@zju.edu.cn">
+                        <span title="envelope">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">
+                        <span title="github" style="font-size: 18px;">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="to-top">
+    <a href="javascript: void(0)" onclick="delicate.toTop()">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <footer>
+        <div class="footer-info gray">
+    <div>
+        <span><a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">Delicate</a> theme designed with ❤️ by <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack">can-dy-jack</a></span>
+    </div>
+    <div>
+        <span>Copyright Ⓒ 2024. All rights reserved.</span>
+    </div>
+</div>
+    </footer>
+
+    
+
+
+<script src="/js/index.js"></script>
+
+
+</body>
+
+</html>

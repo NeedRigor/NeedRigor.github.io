@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锐哥的个人空间 | C++学习笔记（2）算术运算、关系运算</title>
+
+    
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="锐哥">
+
+    <meta name="color-scheme" content="light dark">
+
+    
+    
+<link rel="stylesheet" href="/styles/index.css">
+
+    
+    <link rel="shortcut icon" href="/imgs/logo.png">
+
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/base16/solarized-light.css">
+    
+
+    
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body id="delicate-app">
+    <main>
+        <div class="container">
+            <section class="page-top-badge flex-between w100">
+                <div>
+                    <a href="/">
+                        <span title="github"><i class="fa fa-home" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+                <!-- <div>
+                    
+                </div> -->
+            </section>
+            <aside class="toc-container">
+    <!-- sticky toc -->
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97"><span class="toc-number">1.</span> <span class="toc-text">一、算术运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%87%AA%E5%A2%9E%E5%92%8C%E8%87%AA%E5%87%8F"><span class="toc-number">2.</span> <span class="toc-text">二、自增和自减</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97"><span class="toc-number">3.</span> <span class="toc-text">三、赋值运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81C-11%E5%88%9D%E5%A7%8B%E5%8C%96%E8%B5%8B%E5%80%BC"><span class="toc-number">4.</span> <span class="toc-text">四、C++11初始化赋值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C%E5%92%8CC11%E5%88%9D%E5%A7%8B%E5%8C%96%E8%B5%8B%E5%80%BC"><span class="toc-number">4.1.</span> <span class="toc-text">C和C11初始化赋值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97"><span class="toc-number">5.</span> <span class="toc-text">五、关系运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="toc-number">6.</span> <span class="toc-text">六、逻辑运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97"><span class="toc-number">7.</span> <span class="toc-text">七、逗号运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E8%BF%90%E7%AE%97%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">8.</span> <span class="toc-text">八、运算的优先级</span></a></li></ol>
+</aside>
+
+<article class="markdown-container">
+    <section>
+        <h1>
+            <span>
+                C++学习笔记（2）算术运算、关系运算
+            </span>
+        
+            <div class="post-info">
+                <span></span>
+                <span>
+                    6k字 • 
+                    12分钟
+                </span>
+            </div>
+        </h1>
+    </section>
+
+    <section class="article">
+        <h2 id="一、算术运算">一、算术运算</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">加</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">减</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">乘</td>
+</tr>
+<tr>
+<td style="text-align:center">/</td>
+<td style="text-align:center">除</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">模</td>
+</tr>
+</tbody>
+</table>
+<p>注意：</p>
+<ul>
+<li>整数除法，分母为0，程序异常退出；</li>
+<li>浮点数除法，分母为0.0，得到inf（infinite，无穷大）；</li>
+</ul>
+<h2 id="二、自增和自减">二、自增和自减</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">++变量名</td>
+<td style="text-align:center">变量+1，再执行</td>
+</tr>
+<tr>
+<td style="text-align:center">变量名++</td>
+<td style="text-align:center">执行，再变量+1</td>
+</tr>
+<tr>
+<td style="text-align:center">–变量名</td>
+<td style="text-align:center">变量-1，再执行</td>
+</tr>
+<tr>
+<td style="text-align:center">变量名–</td>
+<td style="text-align:center">执行，再变量-1</td>
+</tr>
+</tbody>
+</table>
+<p>执行结果为执行时变量的值。</p>
+<h2 id="三、赋值运算">三、赋值运算</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">=</td>
+<td style="text-align:center">c = a + b</td>
+</tr>
+<tr>
+<td style="text-align:center">+=</td>
+<td style="text-align:center">c += a; c = c + a</td>
+</tr>
+<tr>
+<td style="text-align:center">-=</td>
+<td style="text-align:center">c -= a; c = c - a</td>
+</tr>
+<tr>
+<td style="text-align:center">*=</td>
+<td style="text-align:center">c *= a; c = c * a</td>
+</tr>
+<tr>
+<td style="text-align:center">/=</td>
+<td style="text-align:center">c /= a; c = c / a</td>
+</tr>
+<tr>
+<td style="text-align:center">%=</td>
+<td style="text-align:center">c %= a; c = c % a</td>
+</tr>
+</tbody>
+</table>
+<p>注意：</p>
+<ul>
+<li>字符串（string）只能使用等号（=）赋值；</li>
+<li>浮点数不能使用%=运算符；</li>
+<li>如果赋值运算符两边操作数的数据类型不同，C++将自动转换数据类型，可能会损失精度，也可能超出取值范围，如果转换不成功，编译时会报错。</li>
+</ul>
+<h2 id="四、C-11初始化赋值">四、C++11初始化赋值</h2>
+<h3 id="C和C11初始化赋值">C<ins>和C</ins>11初始化赋值</h3>
+<ul>
+<li>把值写在小括号中，等于号可以省略（C++标准）</li>
+</ul>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a=(<span class="number">15</span>);  <span class="comment">// 声明变量a，初始化值为15。</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">b</span><span class="params">(<span class="number">20</span>)</span></span>;   <span class="comment">// 声明变量b，初始化值为20。</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>把值写在花括号中，等于号也可以省略（C++11标准），统一初始化列表。</li>
+</ul>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a={<span class="number">15</span>};  <span class="comment">// 声明变量a，初始化值为15。</span></span><br><span class="line"><span class="type">int</span> b{<span class="number">20</span>};   <span class="comment">// 声明变量b，初始化值为20。</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>注意：在Linux平台下，编译需要加-std=c++11参数。</li>
+</ul>
+<h2 id="五、关系运算">五、关系运算</h2>
+<p>用于比较两个表达式的值，运算的结果为1-true和0-false。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数学表达</th>
+<th style="text-align:center">C++表达</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">=</td>
+<td style="text-align:center">==</td>
+</tr>
+<tr>
+<td style="text-align:center">≠</td>
+<td style="text-align:center">!=</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center">&lt;</td>
+</tr>
+<tr>
+<td style="text-align:center">≤</td>
+<td style="text-align:center">&lt;=</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:center">&gt;</td>
+</tr>
+<tr>
+<td style="text-align:center">≥</td>
+<td style="text-align:center">&gt;=</td>
+</tr>
+</tbody>
+</table>
+<p>注意：</p>
+<ul>
+<li>关系运算符的两边可以是表达式；</li>
+<li>用std::cout输出关系运算表达式时，关系表达式要<strong>加括号</strong>；</li>
+<li>适用于字符串（string），常用==和!=。</li>
+</ul>
+<h2 id="六、逻辑运算">六、逻辑运算</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">术语</th>
+<th style="text-align:center">C++表达</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">与</td>
+<td style="text-align:center">a&amp;&amp;b</td>
+</tr>
+<tr>
+<td style="text-align:center">或</td>
+<td style="text-align:center">a||b</td>
+</tr>
+<tr>
+<td style="text-align:center">非</td>
+<td style="text-align:center">!a</td>
+</tr>
+<tr>
+<td style="text-align:center">注意：</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>逻辑运算符的两边可以是数值，也可以是<strong>表达式</strong>；</li>
+<li>用std::cout输出逻辑运算表达式时，逻辑表达式要<strong>加括号</strong>。</li>
+</ul>
+<h2 id="七、逗号运算">七、逗号运算</h2>
+<p>把一行语句中的多个表达式连接起来，程序将从左到右执行表达式。<br>
+语法：<code>表达式一,表达式二,……,表达式n;</code></p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a,b; </span><br><span class="line">b=a=<span class="number">2</span>, a\*<span class="number">2</span>;\\ b = <span class="number">2</span> </span><br><span class="line">b=(a=<span class="number">2</span>, a\*<span class="number">2</span>);\\ b = <span class="number">4</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="八、运算的优先级">八、运算的优先级</h2>
+<ul>
+<li>算术运算的组合方式是<strong>从左到右</strong>，赋值运算则是<strong>从右到左</strong>。</li>
+<li>不确定，就加括号，<strong>多用括号</strong>。</li>
+</ul>
+
+    </section>
+
+    
+        <section class="post-tag">
+            <a href="/tags"><i class="fa fa-tags"></i></a>
+            
+                <a href="/tags/IT%EF%BC%8C-%E5%AD%A6%E4%B9%A0%EF%BC%8C-C/" class="tag-item">
+                    IT， 学习， C++
+                </a>
+            
+        </section>
+    
+    
+        <section class="post-cate">
+            <a href="/categories"><i class="fa fa-inbox"></i></a>
+            
+                <a href="/categories/IT%E6%8A%80%E6%9C%AF/" class="cate-item">
+                    IT技术
+                </a>
+            
+        </section>
+    
+
+    <section class="post-cc">
+        <div class="post-cc-author">
+            <span class="bold">作者：</span><a href="mailto:22232025@zju.edu.cn" title="锐哥">锐哥</a>
+        </div>
+        <div class="post-cc-link">
+            <span class="bold">链接：</span><a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E3%80%81%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97/">http://needrigor.github.io/2024/01/05/C-学习笔记（2）算术运算、关系运算/</a>
+        </div>
+        <div class="post-cc-source">
+            <span class="bold">来源：</span><a href="/">锐哥的个人空间</a>
+        </div>
+        <div class="ppost-cc-declare">
+            <span class="bold">版权声明: </span>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> 许可协议。著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 
+        </div>
+    </section>
+
+    <section class="flex-between" style="margin: 20px 0;">
+        <div class="pre">
+            
+                <a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5/" class="change-link">
+                    <span class="icon"><i class="fa fa-angle-double-left"></i></span>
+                    <span class="text">
+                        <span class="identify">上一篇</span>
+                        <span class="text-title">C++学习笔记（3）条件分支语句</span>
+                    </span>
+                </a>
+            
+        </div>
+        <div class="next">
+            
+                <a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%B3%A8%E9%87%8A%E3%80%81%E5%8F%98%E9%87%8F%E5%92%8C%E5%B8%B8%E9%87%8F/" class="change-link">
+                    <span class="text">
+                        <span class="identify" style="text-align: right;">下一篇</span>
+                        <span class="text-title" style="text-align: right;">C++学习笔记（1）程序的注释、变量和常量</span>
+                    </span>
+                    <span class="icon"><i class="fa fa-angle-double-right"></i></span>
+                </a>
+            
+        </div>
+    </section>
+
+    <!-- comment -->
+    <section class="comment-container">
+        <!-- giscus -->
+        
+    </section>
+</article>
+
+
+
+
+            <section class="article-bottom flex-between">
+                <div class="flex-center">
+                    <img src="/imgs/logo.png" class="logo">
+                    <span>保持好奇</span>
+                </div>
+                <div class="flex-center">
+                    <a href="mailto:22232025@zju.edu.cn">
+                        <span title="envelope">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">
+                        <span title="github" style="font-size: 18px;">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="to-top">
+    <a href="javascript: void(0)" onclick="delicate.toTop()">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <footer>
+        <div class="footer-info gray">
+    <div>
+        <span><a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">Delicate</a> theme designed with ❤️ by <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack">can-dy-jack</a></span>
+    </div>
+    <div>
+        <span>Copyright Ⓒ 2024. All rights reserved.</span>
+    </div>
+</div>
+    </footer>
+
+    
+
+
+<script src="/js/index.js"></script>
+
+
+</body>
+
+</html>
