@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>锐哥的个人空间 | Hello World</title>
+    <title>锐哥的个人空间 | MarkDown使用方法</title>
 
     
     <meta name="description" content="">
@@ -45,40 +45,96 @@
             </section>
             <aside class="toc-container">
     <!-- sticky toc -->
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+    
 </aside>
 
 <article class="markdown-container">
     <section>
         <h1>
             <span>
-                Hello World
+                MarkDown使用方法
             </span>
         
             <div class="post-info">
                 <span></span>
                 <span>
-                    2k字 • 
-                    4分钟
+                    3k字 • 
+                    5分钟
                 </span>
             </div>
         </h1>
     </section>
 
     <section class="article">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <p>#一级标题<br>##二级标题<br>###三级标题<br>####四级标题</p>
+<p>#引用</p>
+<blockquote>
+<p>这是一段引用</p>
+</blockquote>
+<p>#有序列表</p>
+<ol>
+<li>第一步</li>
+<li>第二步</li>
+<li>第三步</li>
+</ol>
+<p>#无序列表</p>
+<ul>
+<li>随便写写</li>
+<li>哎哟不错哦，还蛮简单</li>
+</ul>
+<p>#待办列表<br>明天要做的事</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 吃饭</li>
+<li><input checked="" disabled="" type="checkbox"> 睡觉</li>
+<li><input disabled="" type="checkbox"> 学习</li>
+</ul>
+<p>#代码块：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>##数学公式（使用LateX）：<br>$$<br>\frac{\partial f}{\partial x} &#x3D; 2\sqrt{a}<br>$$</p>
+<p>##表格：</p>
+<table>
+<thead>
+<tr>
+<th align="left">姓名</th>
+<th align="right">年龄</th>
+<th align="center">成绩</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">张三</td>
+<td align="right">21</td>
+<td align="center">29</td>
+</tr>
+<tr>
+<td align="left">李四</td>
+<td align="right">22</td>
+<td align="center">67</td>
+</tr>
+<tr>
+<td align="left">赵锐</td>
+<td align="right">23</td>
+<td align="center">100</td>
+</tr>
+</tbody></table>
+<p>##脚注：<br>我爱你<a href="%E4%BA%BA%E7%B1%BB%E7%9A%84%E4%B8%80%E7%A7%8D%E6%84%9F%E6%83%85">^爱</a></p>
+<p>##横线：</p>
+<hr>
+<p>哈哈哈</p>
+<p>##链接：<br><a href="baidu.com%E2%80%9C%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E2%80%9D">百度</a><br><a href="baidu.com%22%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%22">百度</a></p>
+<p>跳转到标题<a href="#%E8%A1%A8%E6%A0%BC">表格</a></p>
+<p>ULR:<br><a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></p>
+<p>##图片</p>
+<p><img src="http://pic1.win4000.com/wallpaper/2018-10-19/5bc9a52cd09ab.jpg" alt="图片1" title="插入图片链接"></p>
+<p><img src="/home/rigor/NeedRigor/source/image/01.jpg" alt="图片" title="插入图片绝对路径"></p>
+<p>##特殊字体</p>
+<p><em>斜体</em><br><strong>加粗</strong><br><code>printf()</code><br><u>下划线</u><br>:smile:<br>$\theta&#x3D;x^2$<br>H<del>2</del>O, X^2^<br>&#x3D;&#x3D;这是高亮&#x3D;&#x3D;</p>
+<p>##嵌入视频<br>复制b站视频“嵌入代码”</p>
+<iframe src="//player.bilibili.com/player.html?aid=327623069&bvid=BV1JA411h7Gw&cid=171385214&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
 
     </section>
 
@@ -90,7 +146,7 @@
             <span class="bold">作者：</span><a href="mailto:jjack_chen3@163.com" title="锐哥">锐哥</a>
         </div>
         <div class="post-cc-link">
-            <span class="bold">链接：</span><a href="/2023/12/28/hello-world/">http://needrigor.github.io/2023/12/28/hello-world/</a>
+            <span class="bold">链接：</span><a href="/2024/01/05/MarkDown%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">http://needrigor.github.io/2024/01/05/MarkDown使用方法/</a>
         </div>
         <div class="post-cc-source">
             <span class="bold">来源：</span><a href="/">锐哥的个人空间</a>
@@ -103,16 +159,16 @@
     <section class="flex-between" style="margin: 20px 0;">
         <div class="pre">
             
-                <a href="/2023/12/28/My-First-Blog/" class="change-link">
-                    <span class="icon"><i class="fa fa-angle-double-left"></i></span>
-                    <span class="text">
-                        <span class="identify">上一篇</span>
-                        <span class="text-title">My First Blog.</span>
-                    </span>
-                </a>
-            
         </div>
         <div class="next">
+            
+                <a href="/2023/12/28/My-First-Blog/" class="change-link">
+                    <span class="text">
+                        <span class="identify" style="text-align: right;">下一篇</span>
+                        <span class="text-title" style="text-align: right;">My First Blog.</span>
+                    </span>
+                    <span class="icon"><i class="fa fa-angle-double-right"></i></span>
+                </a>
             
         </div>
     </section>
