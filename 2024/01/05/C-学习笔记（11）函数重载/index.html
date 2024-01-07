@@ -49,7 +49,7 @@
             </section>
             <aside class="toc-container">
     <!-- sticky toc -->
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="toc-number">1.</span> <span class="toc-text">一、函数重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">二、内联函数</span></a></li></ol>
 </aside>
 
 <article class="markdown-container">
@@ -62,15 +62,44 @@
             <div class="post-info">
                 <span></span>
                 <span>
-                    0k字 • 
-                    0分钟
+                    10k字 • 
+                    20分钟
                 </span>
             </div>
         </h1>
     </section>
 
     <section class="article">
-        
+        <h2 id="一、函数重载">一、函数重载</h2>
+<p>函数重载（函数多态）是指  <u><strong>设计一系列同名函数，让它们完成相同（似）的工作</strong></u>。<br>
+C++允许定义名称相同的函数，条件是<strong>它们的特征（形参的个数、数据类型和排列顺序）不同</strong>。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">short</span> a  ,string b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">int</span> a    ,string b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">double</span> a,string b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">int</span> a    ,string b, <span class="type">int</span> len)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(string b , <span class="type">int</span> a)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>调用重载函数的时候，在代码中我们用相同的函数名，但是，后面的实参不一样，编译器根据实参与重载函数的形参进行匹配，然后决定调用具体的函数，如果匹配失败，编译器将视为错误。</p>
+<p>在实际开发中，视需求重载各种数据类型，<strong>不要重载功能不同的函数</strong>。</p>
+<p>注意：</p>
+<ul>
+<li>使用重载函数时，如果数据类型不匹配，C++尝试使用类型转换与形参进行匹配，如果转换后有多个函数能匹配上，编译将报错。</li>
+<li>引用可以作为函数重载的条件，但是，调用重载函数的时候，如果实参是变量，编译器将形参类型的本身和类型引用视为同一特征。</li>
+<li>如果重载函数有默认参数，调用函数时，可能导致匹配失败。</li>
+<li>const不能作为函数重载的特征。</li>
+<li>返回值的数据类型不同不能作为函数重载的特征。</li>
+<li>C++的名称修饰：编译时，对每个函数名进行加密，替换成不同名的函数。</li>
+</ul>
+<figure class="highlight d"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MyFunctionFoo(<span class="keyword">int</span>,<span class="built_in">float</span>);</span><br><span class="line"><span class="keyword">void</span> MyFunctionFoo(<span class="built_in">long</span>,<span class="built_in">float</span>);</span><br><span class="line">?MyFunctionFoo@<span class="keyword">@YAXH</span>(<span class="keyword">int</span>,<span class="built_in">float</span>);</span><br><span class="line">#<span class="keyword">void</span> MyFunctionFoo^$@(<span class="built_in">long</span>,<span class="built_in">float</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myswap</span><span class="params">(<span class="type">int</span>&amp; a, <span class="type">int</span>&amp; b)</span>     <span class="comment">// 交换两个整型变量的值。</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> tmp = a; a = b; b = tmp;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myswap</span><span class="params">(string&amp; a, string&amp; b)</span>     <span class="comment">// 交换两个字符串变量的值。</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	string tmp = a; a = b; b = tmp;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">5</span>;</span><br><span class="line">	<span class="built_in">myswap</span>(a, b);</span><br><span class="line">	cout &lt;&lt; <span class="string">"a="</span> &lt;&lt; a &lt;&lt; <span class="string">",b="</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	string c = <span class="string">"西施"</span>, d = <span class="string">"西瓜"</span>;</span><br><span class="line">	<span class="built_in">myswap</span>(c, d);</span><br><span class="line">	cout &lt;&lt; <span class="string">"c="</span> &lt;&lt; c &lt;&lt; <span class="string">",d="</span> &lt;&lt; d &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="二、内联函数">二、内联函数</h2>
+<p>C++将内联函数的代码组合到程序中，可以提高程序运行的速度。<br>
+语法：<strong>在函数声明和定义前加上关键字inline</strong>。<br>
+通常的做法是将函数声明和定义写在一起。<br>
+注意：</p>
+<ul>
+<li>内联函数节省时间，但消耗内存。</li>
+<li>如果函数过大，编译器可能不将其作为内联函数。</li>
+<li>内联函数不能递归。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">show</span><span class="params">(<span class="type">const</span> <span class="type">short</span> bh, <span class="type">const</span> string message)</span>   <span class="comment">// 表白函数。</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	cout &lt;&lt; <span class="string">"亲爱的"</span> &lt;&lt; bh &lt;&lt; <span class="string">"号："</span> &lt;&lt; message &lt;&lt; endl;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="comment">//show(3, "我是一只傻傻鸟。");</span></span><br><span class="line">	{</span><br><span class="line">		<span class="type">int</span> bh = <span class="number">3</span>;</span><br><span class="line">		string message = <span class="string">"我是一只傻傻鸟。"</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">"亲爱的"</span> &lt;&lt; bh &lt;&lt; <span class="string">"号："</span> &lt;&lt; message &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// show(8, "我有一只小小鸟。");</span></span><br><span class="line">	{</span><br><span class="line">		<span class="type">int</span> bh = <span class="number">8</span>;</span><br><span class="line">		string message = <span class="string">"我有一只小小鸟。"</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">"亲爱的"</span> &lt;&lt; bh &lt;&lt; <span class="string">"号："</span> &lt;&lt; message &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// show(5, "我是一只小小鸟。");</span></span><br><span class="line">	{</span><br><span class="line">		<span class="type">int</span> bh = <span class="number">5</span>;</span><br><span class="line">		string message = <span class="string">"我是一只小小鸟。"</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">"亲爱的"</span> &lt;&lt; bh &lt;&lt; <span class="string">"号："</span> &lt;&lt; message &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
     </section>
 
     
