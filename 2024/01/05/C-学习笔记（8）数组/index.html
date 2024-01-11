@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锐哥的个人空间 | C++学习笔记（8）数组</title>
+
+    
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="锐哥">
+
+    <meta name="color-scheme" content="light dark">
+
+    
+    
+<link rel="stylesheet" href="/styles/index.css">
+
+    
+    <link rel="shortcut icon" href="/imgs/logo.png">
+
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/base16/solarized-light.css">
+    
+
+    
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body id="delicate-app">
+    <main>
+        <div class="container">
+            <section class="page-top-badge flex-between w100">
+                <div>
+                    <a href="/">
+                        <span title="github"><i class="fa fa-home" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+                <!-- <div>
+                    
+                </div> -->
+            </section>
+            <aside class="toc-container">
+    <!-- sticky toc -->
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">一、一维数组的基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E5%92%8C%E6%8C%87%E9%92%88"><span class="toc-number">2.</span> <span class="toc-text">二、一维数组和指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%94%A8%E4%BA%8E%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">三、一维数组用于函数的参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%94%A8new%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">4.</span> <span class="toc-text">四、用new动态创建一维数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E6%8E%92%E5%BA%8Fqsort"><span class="toc-number">5.</span> <span class="toc-text">五、一维数组的排序qsort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E6%9F%A5%E6%89%BE-%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE"><span class="toc-number">6.</span> <span class="toc-text">六、一维数组的查找-折半查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81C%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">7.</span> <span class="toc-text">七、C风格的字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">7.1.</span> <span class="toc-text">1. 初始化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B8%85%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">7.2.</span> <span class="toc-text">2. 清空字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%8D%E5%88%B6%E6%88%96%E8%B5%8B%E5%80%BCstrcpy"><span class="toc-number">7.3.</span> <span class="toc-text">3. 字符串复制或赋值strcpy()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%8E%B7%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%95%BF%E5%BA%A6strlen"><span class="toc-number">7.4.</span> <span class="toc-text">4. 获取字符串的长度strlen()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5strcat-%EF%BC%89"><span class="toc-number">7.5.</span> <span class="toc-text">5. 字符串拼接strcat(）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5strncat"><span class="toc-number">7.6.</span> <span class="toc-text">6.字符串拼接strncat()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83strcmp-%E5%92%8Cstrncmp"><span class="toc-number">7.7.</span> <span class="toc-text">7. 字符串比较strcmp()和strncmp()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6strchr-%E5%92%8Cstrrchr"><span class="toc-number">7.8.</span> <span class="toc-text">8. 查找字符strchr()和strrchr()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6%E4%B8%B2strstr"><span class="toc-number">7.9.</span> <span class="toc-text">9. 查找字符串strstr()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E7%94%A8%E4%BA%8Estring%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">7.10.</span> <span class="toc-text">10. 用于string的表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">7.11.</span> <span class="toc-text">11.注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-number">8.</span> <span class="toc-text">八、二维数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%94%A8%E4%BA%8E%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">9.</span> <span class="toc-text">九、二维数组用于函数的参数</span></a></li></ol>
+</aside>
+
+<article class="markdown-container">
+    <section>
+        <h1>
+            <span>
+                C++学习笔记（8）数组
+            </span>
+        
+            <div class="post-info">
+                <span></span>
+                <span>
+                    68k字 • 
+                    136分钟
+                </span>
+            </div>
+        </h1>
+    </section>
+
+    <section class="article">
+        <h2 id="一、一维数组的基本概念">一、一维数组的基本概念</h2>
+<p>数组是一组数据类型相同的变量，可以存放一组数据。</p>
+<ol>
+<li><strong>创建数组</strong><br>
+声明数组的语法：<code>数据类型 数组名[数组长度];</code><br>
+注意：数组长度必须是整数，可以是常量，也可以是变量和表达式。<br>
+(C90规定必须用常量表达式指明数组的大小，C99允许使用整型非常量表达式。经测试，在VS中可以用用整型非常量表达式，不能用变量；但是，Linux中还可以用变量。)</li>
+<li><strong>数组的使用</strong><br>
+语法：<code>数组名[数组下标]</code><br>
+注意：
+<ul>
+<li>数组下标也必须是整数，可以是常量，也可以是变量。</li>
+<li>合法的数组下标取值是：0~(数组长度-1)。</li>
+</ul>
+</li>
+<li><strong>数组占用内存的情况</strong><br>
+数组在内存中占用的空间是<strong>连续</strong>的。<br>
+用<code>sizeof(数组名)</code>可以得到整个数组占用内存空间的大小（只适用于C++基本数据类型）。</li>
+<li><strong>数组的初始化</strong><br>
+声明的时候初始化：</li>
+</ol>
+<figure class="highlight dust"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml">数据类型 数组名[数组长度] = </span><span class="template-variable">{ 值1，值2，值3, ...... , 值n}</span><span class="language-xml">;</span></span><br><span class="line"><span class="language-xml">数据类型 数组名[ ] = </span><span class="template-variable">{ 值1，值2，值3, ...... , 值n}</span><span class="language-xml">;</span></span><br><span class="line"><span class="language-xml">数据类型 数组名[数组长度] = </span><span class="template-variable">{ 0 }</span><span class="language-xml">;  // 把全部的元素初始化为0。</span></span><br><span class="line"><span class="language-xml">数据类型 数组名[数组长度] = </span><span class="template-variable">{ }</span><span class="language-xml">;    // 把全部的元素初始化为0。</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>注意</strong>：如果{}内不足数组长度个数据，剩余数据用0补全。<br>
+C++11标准可以不写等于号。</p>
+<ol start="5">
+<li><strong>清空数组</strong><br>
+用<code>memset()</code>函数可以把数组中全部的元素清零。（只适用于C++基本数据类型）<br>
+函数原型：<code>void *memset(void *s, int c, size_t n);</code><br>
+注意，在Linux下，使用<code>memcpy()</code>函数需要包含头文件 <code>#include &lt;string.h&gt;</code></li>
+<li><strong>复制数组</strong><br>
+用<code>memcpy()</code>函数可以把数组中全部的元素复制到另一个相同大小的数组。（只适用于C++基本数据类型）<br>
+函数原型：<code>void *memcpy(void *dest, const void *src, size_t n);</code><br>
+注意，在Linux下，使用<code>memcpy()</code>函数需要包含头文件<code>#include &lt;string.h&gt;</code><br>
+示例：</li>
+</ol>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> bh[] = {<span class="number">3</span>, <span class="number">6</span>, <span class="number">1</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">322</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">9</span>};               <span class="comment">// 超女编号。</span></span><br><span class="line">	string name[<span class="number">3</span>];    <span class="comment">// 超女姓名。</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; <span class="built_in">sizeof</span>(bh)/<span class="built_in">sizeof</span>(<span class="type">int</span>); ii++)</span><br><span class="line">	{</span><br><span class="line">		cout &lt;&lt; <span class="string">"bh["</span>&lt;&lt;ii&lt;&lt;<span class="string">"]="</span> &lt;&lt; bh[ii] &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> bh1[<span class="built_in">sizeof</span>(bh) / <span class="built_in">sizeof</span>(<span class="type">int</span>)];   <span class="comment">// 数组长度必须是整数，可以是常量，也可以是变量和表达式。</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">memcpy</span>(bh1, bh, <span class="built_in">sizeof</span>(bh));      <span class="comment">// 把数组bh中的内容复制到bh1。    </span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; <span class="built_in">sizeof</span>(bh1) / <span class="built_in">sizeof</span>(<span class="type">int</span>); ii++)</span><br><span class="line">	{</span><br><span class="line">		cout &lt;&lt; <span class="string">"bh1["</span> &lt;&lt; ii &lt;&lt; <span class="string">"]="</span> &lt;&lt; bh1[ii] &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="二、一维数组和指针">二、一维数组和指针</h2>
+<ol>
+<li>
+<p><strong>指针的算术</strong><br>
+==将指针变量（地址的值）加1后，增加的量等于它指向的数据类型的字节数。==</p>
+</li>
+<li>
+<p><strong>数组的地址</strong></p>
+<ul>
+<li>数组在内存中占用的空间是<strong>连续</strong>的。</li>
+<li>C++将数组名解释为<strong>数组第0个元素的地址</strong>。</li>
+<li>数组第0个元素的地址和<strong>数组首地址</strong>的取值是相同的。</li>
+<li>数组第n个元素的地址是：<code>数组首地址+n</code></li>
+<li>C++编译器把<code>数组名[下标]</code>解释为 *(数组首地址+下标)</li>
+</ul>
+</li>
+<li>
+<p><strong>数组的本质</strong><br>
+<u>数组是占用连续空间的一块内存，数组名被解释为数组第0个元素的地址。</u>C++操作这块内存有两种方法：<strong>数组解释法</strong>和<strong>指针表示法</strong>，它们是等价的。</p>
+</li>
+<li>
+<p><strong>数组名不一定会被解释为地址</strong><br>
+在多数情况下，C++将数组名解释为数组的第0个元素的地址，但是，==将sizeof运算符用于数据名时，将返回整个数组占用内存空间的字节数。==<br>
+<u>可以修改指针的值，但数组名是常量，不可修改。</u></p>
+</li>
+</ol>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">char</span> a;      cout &lt;&lt; <span class="string">"sizeof(char)="</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">char</span>) &lt;&lt; endl;            <span class="comment">// 1字节</span></span><br><span class="line">	<span class="type">short</span> b;    cout &lt;&lt; <span class="string">"sizeof(short)="</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">short</span>) &lt;&lt; endl;         <span class="comment">// 2字节</span></span><br><span class="line">	<span class="type">int</span> c;         cout &lt;&lt; <span class="string">"sizeof(int)="</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">int</span>) &lt;&lt; endl;                  <span class="comment">// 4字节</span></span><br><span class="line">	<span class="type">double</span> d; cout &lt;&lt; <span class="string">"sizeof(double)="</span> &lt;&lt; <span class="built_in">sizeof</span>(<span class="type">double</span>) &lt;&lt; endl;   <span class="comment">// 8字节</span></span><br><span class="line">		</span><br><span class="line">	cout &lt;&lt; <span class="string">"a的地址是："</span> &lt;&lt; (<span class="type">void</span> *)&amp; a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"a的地址+1是："</span> &lt;&lt; (<span class="type">void</span>*)( &amp; a + <span class="number">1</span>) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">"b的地址是："</span> &lt;&lt; (<span class="type">void</span>*)&amp;b &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"b的地址+1是："</span> &lt;&lt; (<span class="type">void</span>*)(&amp;b + <span class="number">1</span>) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">"c的地址是："</span> &lt;&lt; (<span class="type">void</span>*)&amp;c &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"c的地址+1是："</span> &lt;&lt; (<span class="type">void</span>*)(&amp;c + <span class="number">1</span>) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">"d的地址是："</span> &lt;&lt; (<span class="type">void</span>*)&amp;d &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"d的地址+1是："</span> &lt;&lt; (<span class="type">void</span>*)(&amp;d + <span class="number">1</span>) &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">double</span> a[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">"a的值是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>) a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"&amp;a的值是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>)&amp;a &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">"a[0]的地址是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>) &amp;a[<span class="number">0</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"a[1]的地址是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>) &amp;a[<span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"a[2]的地址是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>) &amp;a[<span class="number">2</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"a[3]的地址是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>) &amp;a[<span class="number">3</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"a[4]的地址是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>) &amp;a[<span class="number">4</span>] &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="type">double</span>* p = a;</span><br><span class="line">	cout &lt;&lt; <span class="string">"p的值是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>)p &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"p+0的值是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>)(p+  <span class="number">0</span>) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"p+1的值是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>)(p + <span class="number">1</span>) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"p+2的值是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>)(p + <span class="number">2</span>) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"p+3的值是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>)(p + <span class="number">3</span>) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"p+4的值是："</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>)(p + <span class="number">4</span>) &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = { <span class="number">3</span> , <span class="number">6</span> , <span class="number">5</span> , <span class="number">8</span> , <span class="number">9</span> };</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 用数组表示法操作数组。</span></span><br><span class="line">	cout &lt;&lt; <span class="string">"a[0]的值是："</span> &lt;&lt; a[<span class="number">0</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"a[1]的值是："</span> &lt;&lt; a[<span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"a[2]的值是："</span> &lt;&lt; a[<span class="number">2</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"a[3]的值是："</span> &lt;&lt; a[<span class="number">3</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"a[4]的值是："</span> &lt;&lt; a[<span class="number">4</span>] &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 用指针表示法操作数组。</span></span><br><span class="line">	<span class="type">int</span>* p = a;</span><br><span class="line">	cout &lt;&lt; <span class="string">"*(p+0)的值是："</span> &lt;&lt; *(p+  <span class="number">0</span>) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"*(p+1)的值是："</span> &lt;&lt; *(p + <span class="number">1</span>) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"*(p+2)的值是："</span> &lt;&lt; *(p + <span class="number">2</span>) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"*(p+3)的值是："</span> &lt;&lt; *(p + <span class="number">3</span>) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"*(p+4)的值是："</span> &lt;&lt; *(p + <span class="number">4</span>) &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="三、一维数组用于函数的参数">三、一维数组用于函数的参数</h2>
+<ol>
+<li><strong>指针的数组表示</strong><br>
+在C<ins>内部，用指针来处理数组。<br>
+C</ins>编译器把<code>数组名[下标]</code>解释为<code>*(数组首地址+下标)</code><br>
+C++编译器把<code>地址[下标]</code>解释为<code>*(地址+下标)</code></li>
+<li><strong>一维数组用于函数的参数</strong><br>
+<u>一维数组用于函数的参数时，只能传数组的地址，并且必须把数组长度也传进去，除非数组中有最后一个元素的标志。</u><br>
+书写方法有两种：</li>
+</ol>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>* arr, <span class="type">int</span> len)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>注意：</p>
+<ul>
+<li>在函数中，可以用数组表示法，也可以用指针表示法。</li>
+<li>在函数中，不要对指针名用sizeof运算符，它不是数组名。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">char</span> a[<span class="number">20</span>];             <span class="comment">// 这是一个长度为20的字符型数组。</span></span><br><span class="line"></span><br><span class="line">	<span class="type">int</span>* p = (<span class="type">int</span> *)a;        <span class="comment">// 让整型指针p指向数组a的内存。</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; <span class="number">6</span>; ii++)</span><br><span class="line">	{</span><br><span class="line">		p[ii] = ii + <span class="number">300</span>;     <span class="comment">// 用数组表示法操作指针。</span></span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; <span class="number">6</span>; ii++)</span><br><span class="line">	{</span><br><span class="line">		cout &lt;&lt; <span class="string">"*(p+"</span> &lt;&lt; ii &lt;&lt; <span class="string">")的值是："</span> &lt;&lt; *(p + ii) &lt;&lt; endl;    <span class="comment">// 地址[下标]  解释为  *(地址+下标)。</span></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void func(int *arr,int len)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; len; ii++)</span><br><span class="line">	{</span><br><span class="line">		cout &lt;&lt; <span class="string">"arr["</span> &lt;&lt; ii &lt;&lt; <span class="string">"]的值是："</span> &lt;&lt; arr[ii] &lt;&lt; endl;              <span class="comment">// 用数组表示法操作指针。</span></span><br><span class="line">		cout &lt;&lt; <span class="string">"*(arr+"</span> &lt;&lt; ii &lt;&lt; <span class="string">")的值是："</span> &lt;&lt; *(arr + ii) &lt;&lt; endl;   <span class="comment">// 地址[下标]  解释为  *(地址+下标)。</span></span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> a[] = {<span class="number">2</span>,<span class="number">8</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">9</span>};</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">func</span>(a, <span class="built_in">sizeof</span>(a) / <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="四、用new动态创建一维数组">四、用new动态创建一维数组</h2>
+<p><u>普通数组在<strong>栈</strong>上分配内存，栈很小；如果需要存放更多的元素，必须在<strong>堆</strong>上分配内存。</u><br>
+动态创建一维数组的语法：<code>数据类型 *指针=new 数据类型[数组长度];</code><br>
+释放一维数组的语法：<code>delete [] 指针;</code><br>
+注意：</p>
+<ul>
+<li><u>动态创建的数组没有数组名，不能用sizeof运算符。(只有指针名)</u></li>
+<li>可以用<strong>数组表示法</strong>和<strong>指针表示法</strong>两种方式使用动态创建的数组。</li>
+<li>不要用<code>delete[]</code>释放同一个内存块两次（否则等同于操作野指针）。</li>
+<li>对空指针用<code>delete[]</code>是安全的（释放内存后，应该把指针置空nullptr）。</li>
+<li>声明普通数组的时候，数组长度可以用<strong>变量</strong>，相当于在栈上动态创建数组，并且不需要释放。</li>
+<li><u>如果内存不足，调用new会产生异常，导致程序中止；如果在new关键字后面加<code>(std::nothrow)</code>选项，则返回nullptr，不会产生异常。</u></li>
+<li>为什么用<code>delete[]</code>释放数组的时候，不需要指定数组的大小？因为系统会自动跟踪已分配数组的内存。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> *arr=<span class="keyword">new</span> <span class="type">int</span>[<span class="number">8</span>];          <span class="comment">// 创建8个元素的整型数组。</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; <span class="number">8</span>; ii++)</span><br><span class="line">	{</span><br><span class="line">		arr[ii] = <span class="number">100</span> + ii;                                                                  <span class="comment">// 数组表示法。</span></span><br><span class="line">		cout &lt;&lt; <span class="string">"arr["</span> &lt;&lt; ii &lt;&lt; <span class="string">"]="</span> &lt;&lt; *(arr + ii) &lt;&lt; endl;        <span class="comment">// 指针表示法。</span></span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[]arr;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="五、一维数组的排序qsort">五、一维数组的排序qsort</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">函数的原型：</span><br><span class="line">```cpp</span><br><span class="line">void qsort(void *base, size_t nmemb, size_t size, int (*compar)(const void *, const void *));</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>第一个参数</strong>：数组的起始地址。<br>
+<strong>第二个参数</strong>：数组元素的个数（数组长度）。<br>
+<strong>第三个参数</strong>：数组元素的大小（sizeof(数组的数据类型)）。<br>
+<strong>第四个参数</strong>：回调函数的地址。<br>
+回调函数决定了排序的顺序，声明如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">compar</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *p1, <span class="type">const</span> <span class="type">void</span> *p2)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>如果函数的返回值&lt; 0 ，那么p1所指向元素会被排在p2所指向元素的前面。</li>
+<li>如果函数的返回值==0，那么p1所指向元素与p2所指向元素的顺序不确定。</li>
+<li>如果函数的返回值&gt; 0 ，那么p1所指向元素会被排在p2所指向元素的后面。</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">- 形参中的地址用void是为了支持任意数据类型，&lt;u&gt;在回调函数中必须具体化&lt;/u&gt;。</span><br><span class="line">- 为什么需要第三个形参size_t size？</span><br><span class="line">- size_t是C标准库中定义的，在64位系统中是8字节无符号整型（unsigned long long）。</span><br><span class="line">typedef unsigned long long size_t</span><br><span class="line">- 排序的需求除了升序和降序，还有很多不可预知的情况，只能用回调函数。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">```cpp</span><br><span class="line">#include &lt;iostream&gt;         // 包含头文件。</span><br><span class="line">using namespace std;        // 指定缺省的命名空间。</span><br><span class="line"></span><br><span class="line">int compasc(const void* p1, const void* p2)         // 升序的回调函数。</span><br><span class="line">{</span><br><span class="line">	return *((int*)p1) - *((int*)p2);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">int compdesc(const void* p1, const void* p2)       // 降序的回调函数。</span><br><span class="line">{</span><br><span class="line">	return *((int*)p2) - *((int*)p1);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">{</span><br><span class="line">	int a[8] = { 4,2,7,5,8,6,1,3 };</span><br><span class="line"></span><br><span class="line">	qsort(a,sizeof(a)/sizeof(int),sizeof(int),compasc); // 对数组a进行升序排序。</span><br><span class="line"></span><br><span class="line">	for (int ii = 0; ii &lt; 8; ii++)</span><br><span class="line">	{</span><br><span class="line">		cout &lt;&lt; "a[" &lt;&lt; ii &lt;&lt; "]=" &lt;&lt; a[ii] &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	qsort(a, sizeof(a) / sizeof(int), sizeof(int), compdesc); // 对数组a进行降序排序。</span><br><span class="line"></span><br><span class="line">	for (int ii = 0; ii &lt; 8; ii++)</span><br><span class="line">	{</span><br><span class="line">		cout &lt;&lt; "a[" &lt;&lt; ii &lt;&lt; "]=" &lt;&lt; a[ii] &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="六、一维数组的查找-折半查找">六、一维数组的查找-折半查找</h2>
+<p>折半查找也叫二分查找，<u>只适用于已排序的数组（升序降序都可以）</u>。<br>
+示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在arr中查找key，成功返回key在arr中的数组下标，失败返回-1。</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">search</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len, <span class="type">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> low = <span class="number">0</span>, high = len<span class="number">-1</span>,mid;          <span class="comment">// 初始化：low=0，high=数组长度-1。</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (low &lt;= high)</span><br><span class="line">	{</span><br><span class="line">		mid = (low + high) / <span class="number">2</span>;     <span class="comment">// 计算mid指针的位置。</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (arr[mid] == key) <span class="keyword">return</span> mid;         <span class="comment">// 查找成功。     </span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (arr[mid] &gt; key) high = mid - <span class="number">1</span>;  <span class="comment">// 继续在前半区查找。</span></span><br><span class="line">		<span class="keyword">else</span> low = mid + <span class="number">1</span>;                    <span class="comment">// 继续在后半区查找。</span></span><br><span class="line">	</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 查找失败。</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> a[<span class="number">10</span>] = { <span class="number">7</span>,<span class="number">9</span>,<span class="number">12</span>,<span class="number">16</span>,<span class="number">21</span>,<span class="number">25</span>,<span class="number">30</span>,<span class="number">35</span>,<span class="number">41</span>,<span class="number">48</span> };    <span class="comment">// 必须是已排好序的数组。</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">search</span>(a, <span class="number">10</span>, <span class="number">30</span>) &gt;= <span class="number">0</span>) cout &lt;&lt; <span class="string">"在数组a中查找30成功。\n"</span>;</span><br><span class="line">	<span class="keyword">else</span> cout &lt;&lt; <span class="string">"在数组a中查找30失败。\n"</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="七、C风格的字符串">七、C风格的字符串</h2>
+<p>C语言约定：如果字符型（char）数组的末尾包含了空字符<code>\0</code>（也就是0），那么该数组中的内容就是一个字符串。<br>
+因为字符串需要用0结尾，所以在声明字符数组的时候，要预留多一个字节用来存放0。<br>
+<code>char name[21];  // 声明一个存放20个英文字符或十个中文的字符串。</code></p>
+<h3 id="1-初始化方法">1. 初始化方法</h3>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> name[<span class="number">11</span>];                 <span class="comment">// 可以存放10个字符，没有初始化，里面是垃圾值。</span></span><br><span class="line"><span class="type">char</span> name[<span class="number">11</span>] = <span class="string">"hello"</span>;         <span class="comment">// 初始内容为hello，系统会自动添加0。</span></span><br><span class="line"><span class="type">char</span> name[]   = { <span class="string">"hello"</span> };      <span class="comment">// 初始内容为hello，系统会自动添加0，数组长度是6。</span></span><br><span class="line"><span class="type">char</span> name[<span class="number">11</span>] = { <span class="string">"hello"</span> };      <span class="comment">// 初始内容为hello，系统会自动添加0。</span></span><br><span class="line"><span class="type">char</span> name[<span class="number">11</span>]   { <span class="string">"hello"</span> };      <span class="comment">// 初始内容为hello，系统会自动添加0。C++11标准。</span></span><br><span class="line"><span class="type">char</span> name[<span class="number">11</span>] = { <span class="number">0</span> };          <span class="comment">// 把全部的元素初始化为0。</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-清空字符串">2. 清空字符串</h3>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(name,<span class="number">0</span>,<span class="built_in">sizeof</span>(name));   <span class="comment">// 把全部的元素置为0。</span></span><br><span class="line">name[<span class="number">0</span>]=<span class="number">0</span>;       <span class="comment">// 不规范，有隐患，不推荐。</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="3-字符串复制或赋值strcpy">3. 字符串复制或赋值strcpy()</h3>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">char</span> *<span class="title">strcpy</span><span class="params">(<span class="type">char</span>* dest, <span class="type">const</span> <span class="type">char</span>* src)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>功 能: <strong>将参数src字符串拷贝至参数dest所指的地址</strong>。</li>
+<li>返回值: 返回参数dest的字符串起始地址。</li>
+<li>复制完字符串后，会在dest后追加0。</li>
+<li>如果参数dest所指的内存空间不够大，会导致数组的越界。</li>
+</ul>
+<h3 id="4-获取字符串的长度strlen">4. 获取字符串的长度strlen()</h3>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">size_t</span>  <span class="title">strlen</span><span class="params">( <span class="type">const</span> <span class="type">char</span>*  str)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>功能：<strong>计算字符串的有效长度，不包含0</strong>。<br>
+返回值：返回字符串的字符数。<br>
+strlen()函数计算的是字符串的<strong>实际长度，遇到0结束</strong>。</p>
+<h3 id="5-字符串拼接strcat-）">5. 字符串拼接strcat(）</h3>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">char</span> *<span class="title">strcat</span><span class="params">(<span class="type">char</span>* dest,<span class="type">const</span> <span class="type">char</span>* src)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>功能：<strong>将src字符串拼接到dest所指的字符串尾部</strong>。<br>
+返回值：返回dest字符串起始地址。<br>
+dest最后原有的结尾字符0会被覆盖掉，并在连接后的字符串的尾部再增加一个0。<br>
+如果参数dest所指的内存空间不够大，会导致数组的越界。</p>
+<h3 id="6-字符串拼接strncat">6.字符串拼接strncat()</h3>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">char</span> *<span class="title">strncat</span> <span class="params">(<span class="type">char</span>* dest,<span class="type">const</span> <span class="type">char</span>* src, <span class="type">const</span> <span class="type">size_t</span> n)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>功能：<strong>将src字符串的前n个字符拼接到dest所指的字符串尾部</strong>。<br>
+返回值：返回dest字符串的起始地址。<br>
+如果n大于等于字符串src的长度，那么将src全部追加到dest的尾部，如果n小于字符串src的长度，只追加src的前n个字符。<br>
+strncat会将dest字符串最后的0覆盖掉，字符追加完成后，再追加0。<br>
+如果参数dest所指的内存空间不够大，会导致数组的越界。<br>
+<em>str### 7. 字符串拼接strncat()<br>
+char <em>strncat (char</em> dest,const char</em> src, const size_t n)</p>
+<h3 id="7-字符串比较strcmp-和strncmp">7. 字符串比较strcmp()和strncmp()</h3>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">strcmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str1, <span class="type">const</span> <span class="type">char</span> *str2 )</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>功能：<strong>比较str1和str2的大小</strong>。<br>
+返回值：相等返回0，str1大于str2返回1，str1小于str2返回-1；</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">strncmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str1,<span class="type">const</span> <span class="type">char</span> *str2, <span class="type">const</span> <span class="type">size_t</span> n)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>功能：<strong>比较str1和str2前n个字符的大小</strong>。<br>
+返回值：相等返回0，str1大于str2返回1，str1小于str2返回-1；</p>
+<ul>
+<li>两个字符串比较的方法是比较字符的ASCII码的大小，从两个字符串的第一个字符开始，如果分不出大小，就比较第二个字符，如果全部的字符都分不出大小，就返回0，表示两个字符串相等。<br>
+在实际开发中，程序员一般只关心字符串是否相等，不关心哪个字符串更大或更小。</li>
+</ul>
+<h3 id="8-查找字符strchr-和strrchr">8. 查找字符strchr()和strrchr()</h3>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> <span class="type">char</span> *<span class="title">strchr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, <span class="type">int</span> c)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>返回在字符串s中第一次出现c的位置，如果找不到，返回0。</strong></p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> <span class="type">char</span> *<span class="title">strrchr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, <span class="type">int</span> c)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>返回在字符串s中最后一次出现c的位置，如果找不到，返回0。</strong></p>
+<h3 id="9-查找字符串strstr">9. 查找字符串strstr()</h3>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">char</span> *<span class="title">strstr</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* str,<span class="type">const</span> <span class="type">char</span>* substr)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>功能：<strong>检索子串在字符串中首次出现的位置</strong>。<br>
+返回值：返回字符串str中第一次出现子串substr的地址；如果没有检索到子串，则返回0。</p>
+<h3 id="10-用于string的表达式">10. 用于string的表达式</h3>
+<p>可以把C风格的字符串用于包含了string类型的赋值拼接等表达式中。</p>
+<h3 id="11-注意事项">11.注意事项</h3>
+<p>a）字符串的结尾标志是0，按照约定，在处理字符串的时候，会从起始位置开始搜索0，一直找下去，找到为止（不会判断数组是否越界）。<br>
+b）结尾标志0后面的都是垃圾内容。<br>
+c）字符串在每次使用前都要初始化，减少入坑的可能，是每次，不是第一次。<br>
+d）不要在子函数中对字符指针用sizeof运算，所以，不能在子函数中对传入的字符串进行初始化，除非字符串的长度也作为参数传入到了子函数中。<br>
+e）在VS中，如果要使用C标准的字符串操作函数，要在源代码文件的最上面加</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br></pre></td></tr></tbody></table></figure>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">char</span> name[<span class="number">11</span>];</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(name, <span class="number">0</span>, <span class="built_in">sizeof</span>(name));</span><br><span class="line">	<span class="comment">// name[0] = 0;</span></span><br><span class="line">	<span class="comment">// strcpy(name, "hello");</span></span><br><span class="line">	<span class="built_in">strncpy</span>(name, <span class="string">"hello"</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">"name="</span> &lt;&lt; name &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">"name[0]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">0</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[1]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[2]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">2</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[3]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">3</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[4]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">4</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[5]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">5</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[6]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">6</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[7]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">7</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[8]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">8</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[9]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">9</span>] &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">"name[10]="</span> &lt;&lt; (<span class="type">int</span>)name[<span class="number">10</span>] &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="八、二维数组">八、二维数组</h2>
+<p>一维数组的数学概念是线性表，二维数组的数学概念是<strong>矩阵</strong>。</p>
+<ol>
+<li><strong>创建二维数组</strong><br>
+声明二维数组的语法：<code>数据类型 数组名[行数][列数];</code><br>
+注意：数组长度必须是整数，可以是常量，也可以是变量和表达式。<br>
+C90规定必须用常量表达式指明数组的大小，C99允许使用整型非常量表达式。经测试，在VS中可以用用整型非常量表达式，不能用变量；但是，Linux中还可以用变量。</li>
+<li><strong>二维数组的使用</strong><br>
+可以通过行下标和列下标访问二维数组中元素，下标从0开始。<br>
+语法：<code>数组名[行下标][列下标]</code><br>
+注意：
+<ul>
+<li>二维数组下标也必须是整数，可以是常量，也可以是变量。</li>
+<li>合法的行下标取值是：0~(行数-1)。</li>
+<li>合法的列下标取值是：0~(列数-1)。</li>
+</ul>
+</li>
+<li><strong>二维数组占用内存的情况</strong><br>
+用<code>sizeof(数组名)</code>可以得到整个二维数组占用内存空间的大小（只适用于C++基本数据类型）。<br>
+二维数组在内存中占用的空间是<strong>连续</strong>的。</li>
+<li><strong>二维数组的初始化</strong><br>
+声明的时候初始化：</li>
+</ol>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">数据类型 数组名[行数][列数] = { {数据<span class="number">1</span>，数据<span class="number">2</span> } ，{数据<span class="number">3</span>，数据<span class="number">4</span> },...... };</span><br><span class="line">数据类型 数组名[行数][列数] = { 数据<span class="number">1</span>，数据<span class="number">2</span>，数据<span class="number">3</span>，数据<span class="number">4</span>, ......};</span><br><span class="line">数据类型 数组名[ ][列数] = { 数据<span class="number">1</span>，数据<span class="number">2</span>，数据<span class="number">3</span>，数据<span class="number">4</span>,......};</span><br><span class="line">数据类型 数组名[行数][列数] = { <span class="number">0</span> };  <span class="comment">// 把全部的元素初始化为0。</span></span><br><span class="line">数据类型 数组名[行数][列数] = { };    <span class="comment">// 把全部的元素初始化为0。</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>注意</strong>：如果{}内不足数组长度个数据，剩余数据用0补全，但是，不建议这么用，你可能在数组中漏了某个值。如果想把数组中全部的元素初始化为0，可以在{}内只填一个0或什么也不填。<br>
+C++11标准可以不写等于号。</p>
+<ol start="5">
+<li><strong>清空二维数组</strong><br>
+用<code>memset()</code>函数可以把二维数组中全部的元素清零。（只适用于C++基本数据类型）<br>
+函数原型：<code>void *memset(void *s, int c, size_t n);</code><br>
+注意，在Linux下，使用memcpy()函数需要包含头文件<code>#include &lt;string.h&gt;</code></li>
+<li><strong>复制二维数组</strong><br>
+用<code>memcpy()</code>函数可以把二维数组中全部的元素复制到另一个相同大小的数组（没说多少维）。（只适用于C++基本数据类型）<br>
+函数原型：<code>void *memcpy(void *dest, const void *src, size_t n);</code><br>
+注意，在Linux下，使用<code>memcpy()</code>函数需要包含头文件<code>#include &lt;string.h&gt;</code></li>
+</ol>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> bh[][<span class="number">3</span>] = { <span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span> };</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; <span class="number">2</span>; ii++)                 <span class="comment">// 第一层循环表示行数，循环继续的条件是计数器小于行数。</span></span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> jj = <span class="number">0</span>; jj &lt; <span class="number">3</span>; jj++)              <span class="comment">// 第二层循环表示列数，循环继续的条件是计数器小于列数。</span></span><br><span class="line">		{</span><br><span class="line">			cout &lt;&lt; <span class="string">"&amp;bh["</span>&lt;&lt;ii&lt;&lt;<span class="string">"]["</span>&lt;&lt;jj&lt;&lt;<span class="string">"] = "</span> &lt;&lt; (<span class="type">long</span> <span class="type">long</span>) &amp; bh[ii][jj] &lt;&lt; <span class="string">"  "</span>;          <span class="comment">// 处理二维数组的每个元素。</span></span><br><span class="line">		}</span><br><span class="line">		cout &lt;&lt; endl;          <span class="comment">// 每处理一行数据后，输出一个换行。</span></span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span>* p = (<span class="type">int</span> *)bh;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; <span class="number">6</span>; ii++)</span><br><span class="line">	{</span><br><span class="line">		cout &lt;&lt; <span class="string">"p["</span> &lt;&lt; ii &lt;&lt; <span class="string">"]="</span> &lt;&lt; p[ii] &lt;&lt; endl;     <span class="comment">// 一维数组的数组表示法。</span></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="九、二维数组用于函数的参数">九、二维数组用于函数的参数</h2>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* p;      <span class="comment">// 整型指针。</span></span><br><span class="line"><span class="type">int</span>* p[<span class="number">3</span>];   <span class="comment">// 一维整型指针数组，元素是3个整型指针（p[0]、p[1]、p[2]）。</span></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="title">p</span><span class="params">()</span></span>;    <span class="comment">// 函数p的返回值类型是整型的地址。</span></span><br><span class="line"><span class="built_in">int</span> (*p)(<span class="type">int</span> ,<span class="type">int</span>);   <span class="comment">// p是函数指针，函数的返回值是整型。</span></span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li><strong>行指针（数组指针）</strong><br>
+声明行指针的语法：<code>数据类型 (*行指针名)[行的大小];  // 行的大小即数组长度。</code></li>
+</ol>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> (*p1)[<span class="number">3</span>];  <span class="comment">// p1是行指针，用于指向数组长度为3的int型数组。</span></span><br><span class="line"><span class="built_in">int</span> (*p2)[<span class="number">5</span>];  <span class="comment">// p2行指针，用于指向数组长度为5的int型数组。</span></span><br><span class="line"><span class="built_in">double</span> (*p3)[<span class="number">5</span>];  <span class="comment">// p3是行指针，用于指向数组长度为5的double型数组。</span></span><br></pre></td></tr></tbody></table></figure>
+<p>一维数组名被解释为<strong>数组第0个元素的地址</strong>。<br>
+对一维数组名取地址得到的是数组的地址，是行地址。</p>
+<ol start="2">
+<li><strong>二维数组名是行地址</strong></li>
+</ol>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> bh[<span class="number">2</span>][<span class="number">3</span>] = { {<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>},{<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>} };</span><br><span class="line"><span class="built_in">int</span> (*p)[<span class="number">3</span>]=bh;</span><br></pre></td></tr></tbody></table></figure>
+<p>bh是二维数组名，该数组有2个元素，每一个元素本身又是一个数组长度为3的整型数组。<br>
+bh被解释为数组长度为3的整型数组类型的行地址。<br>
+如果存放bh的值，要用数组长度为3的整型数组类型的行指针。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span> bh[<span class="number">4</span>][<span class="number">2</span>][<span class="number">3</span>];</span><br><span class="line"><span class="built_in">int</span> (*p)[<span class="number">2</span>][<span class="number">3</span>]=bh;</span><br></pre></td></tr></tbody></table></figure>
+<p>bh是三维数组名，该数组有4元素，每一个元素本身又是一个2行3列的二维数组。<br>
+bh被解释为2行3列的二维数组类型的二维地址。<br>
+如果存放bh的值，要用2行3列的二维数组类型的二维指针。</p>
+<ol start="3">
+<li><strong>把二维数组传递给函数</strong><br>
+如果要把bh传给函数，函数的声明如下：</li>
+</ol>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> (*p)[<span class="number">3</span>],<span class="type">int</span> len)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> p[][<span class="number">3</span>],<span class="type">int</span> len)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// void func(int(*p)[3], int len)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> p[][<span class="number">3</span>], <span class="type">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; len; ii++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> jj = <span class="number">0</span>; jj &lt; <span class="number">3</span>; jj++)</span><br><span class="line">			cout &lt;&lt; <span class="string">"p["</span> &lt;&lt; ii &lt;&lt; <span class="string">"]["</span> &lt;&lt; jj &lt;&lt; <span class="string">"]="</span> &lt;&lt; p[ii][jj] &lt;&lt; <span class="string">"  "</span> ;</span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> bh[<span class="number">2</span>][<span class="number">3</span>] = { {<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>},{<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>} };</span><br><span class="line"></span><br><span class="line">	<span class="built_in">func</span>(bh,<span class="number">2</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;        <span class="comment">// 指定缺省的命名空间。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> (*p)[<span class="number">2</span>][<span class="number">3</span>])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> ii = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// 遍历三维数组p，给它的每个元素赋值。</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> a = <span class="number">0</span>; a &lt; <span class="number">4</span>; a++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> b = <span class="number">0</span>; b &lt; <span class="number">2</span>; b++)</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> c = <span class="number">0</span>; c &lt; <span class="number">3</span>; c++)</span><br><span class="line">				p[a][b][c] = ii++;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> bh[<span class="number">4</span>][<span class="number">2</span>][<span class="number">3</span>];        <span class="comment">// 假设有4个超女方阵，每个方阵有2行，每行有3个超女。</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(bh, <span class="number">0</span>, <span class="built_in">sizeof</span>(bh));</span><br><span class="line"></span><br><span class="line">	<span class="built_in">func</span>(bh);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> a = <span class="number">0</span>; a &lt; <span class="number">4</span>; a++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> b = <span class="number">0</span>; b &lt; <span class="number">2</span>; b++)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> c = <span class="number">0</span>; c &lt; <span class="number">3</span>; c++)</span><br><span class="line">				cout &lt;&lt; bh[a][b][c] &lt;&lt;<span class="string">"\t"</span>;</span><br><span class="line"></span><br><span class="line">			cout &lt;&lt; endl;    <span class="comment">// 每显示一行后，输出一个换行符。</span></span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; endl&lt;&lt;endl;    <span class="comment">// 每显示一个方阵后，输出两个换行符。</span></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+    </section>
+
+    
+        <section class="post-tag">
+            <a href="/tags"><i class="fa fa-tags"></i></a>
+            
+                <a href="/tags/IT%EF%BC%8C-%E5%AD%A6%E4%B9%A0%EF%BC%8C-C/" class="tag-item">
+                    IT， 学习， C++
+                </a>
+            
+        </section>
+    
+    
+        <section class="post-cate">
+            <a href="/categories"><i class="fa fa-inbox"></i></a>
+            
+                <a href="/categories/IT%E6%8A%80%E6%9C%AF/" class="cate-item">
+                    IT技术
+                </a>
+            
+        </section>
+    
+
+    <section class="post-cc">
+        <div class="post-cc-author">
+            <span class="bold">作者：</span><a href="mailto:22232025@zju.edu.cn" title="锐哥">锐哥</a>
+        </div>
+        <div class="post-cc-link">
+            <span class="bold">链接：</span><a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89%E6%95%B0%E7%BB%84/">http://needrigor.github.io/2024/01/05/C-学习笔记（8）数组/</a>
+        </div>
+        <div class="post-cc-source">
+            <span class="bold">来源：</span><a href="/">锐哥的个人空间</a>
+        </div>
+        <div class="ppost-cc-declare">
+            <span class="bold">版权声明: </span>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> 许可协议。著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 
+        </div>
+    </section>
+
+    <section class="flex-between" style="margin: 20px 0;">
+        <div class="pre">
+            
+                <a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%85%B1%E5%90%8C%E4%BD%93%E5%92%8C%E6%9E%9A%E4%B8%BE/" class="change-link">
+                    <span class="icon"><i class="fa fa-angle-double-left"></i></span>
+                    <span class="text">
+                        <span class="identify">上一篇</span>
+                        <span class="text-title">C++学习笔记（9）结构体、共同体和枚举</span>
+                    </span>
+                </a>
+            
+        </div>
+        <div class="next">
+            
+                <a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89%E6%8C%87%E9%92%88%E5%92%8C%E5%86%85%E5%AD%98/" class="change-link">
+                    <span class="text">
+                        <span class="identify" style="text-align: right;">下一篇</span>
+                        <span class="text-title" style="text-align: right;">C++学习笔记（7）指针和内存</span>
+                    </span>
+                    <span class="icon"><i class="fa fa-angle-double-right"></i></span>
+                </a>
+            
+        </div>
+    </section>
+
+    <!-- comment -->
+    <section class="comment-container">
+        <!-- giscus -->
+        
+    </section>
+</article>
+
+
+
+
+            <section class="article-bottom flex-between">
+                <div class="flex-center">
+                    <img src="/imgs/logo.png" class="logo">
+                    <span>保持好奇</span>
+                </div>
+                <div class="flex-center">
+                    <a href="mailto:22232025@zju.edu.cn">
+                        <span title="envelope">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">
+                        <span title="github" style="font-size: 18px;">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="to-top">
+    <a href="javascript: void(0)" onclick="delicate.toTop()">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <footer>
+        <div class="footer-info gray">
+    <div>
+        <span><a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">Delicate</a> theme designed with ❤️ by <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack">can-dy-jack</a></span>
+    </div>
+    <div>
+        <span>Copyright Ⓒ 2024. All rights reserved.</span>
+    </div>
+</div>
+    </footer>
+
+    
+
+
+<script src="/js/index.js"></script>
+
+
+</body>
+
+</html>

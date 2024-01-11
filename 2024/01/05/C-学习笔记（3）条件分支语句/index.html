@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锐哥的个人空间 | C++学习笔记（3）条件分支语句</title>
+
+    
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="锐哥">
+
+    <meta name="color-scheme" content="light dark">
+
+    
+    
+<link rel="stylesheet" href="/styles/index.css">
+
+    
+    <link rel="shortcut icon" href="/imgs/logo.png">
+
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/base16/solarized-light.css">
+    
+
+    
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body id="delicate-app">
+    <main>
+        <div class="container">
+            <section class="page-top-badge flex-between w100">
+                <div>
+                    <a href="/">
+                        <span title="github"><i class="fa fa-home" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+                <!-- <div>
+                    
+                </div> -->
+            </section>
+            <aside class="toc-container">
+    <!-- sticky toc -->
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81if%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">一、if语句的基本结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B5%8C%E5%A5%97%E4%BD%BF%E7%94%A8if%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">二、嵌套使用if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%A4%9A%E6%9D%A1%E4%BB%B6%E7%9A%84if%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.</span> <span class="toc-text">三、多条件的if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97"><span class="toc-number">4.</span> <span class="toc-text">四、三目运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81switch%E8%AF%AD%E5%8F%A5"><span class="toc-number">5.</span> <span class="toc-text">五、switch语句</span></a></li></ol>
+</aside>
+
+<article class="markdown-container">
+    <section>
+        <h1>
+            <span>
+                C++学习笔记（3）条件分支语句
+            </span>
+        
+            <div class="post-info">
+                <span></span>
+                <span>
+                    7k字 • 
+                    14分钟
+                </span>
+            </div>
+        </h1>
+    </section>
+
+    <section class="article">
+        <h2 id="一、if语句的基本结构">一、if语句的基本结构</h2>
+<p>语法：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (表达式)</span><br><span class="line">{</span><br><span class="line">    ;<span class="comment">// 表达式为真时执行的语句。</span></span><br><span class="line">}</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">{</span><br><span class="line">    ;<span class="comment">// 表达式为假时执行的语句。</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>注意：</p>
+<ul>
+<li>if或else分支花括号内的代码如果只有一行，花括号可以不写；</li>
+<li>如果一行也没有，花括号一定要写；</li>
+<li>if (表达式)和else后不能加分号，因为分号表示空语句。<br>
+==<strong>C<ins>用分号作为一条语句结束的标志。如果在C</ins>程序中不小心多写了一个分号，那么该分号会被当成一条空语句。</strong>==</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a == b )</span><br><span class="line">{</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>等价于</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a == b ) cout &lt;&lt; a &lt;&lt; endl;</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="二、嵌套使用if语句">二、嵌套使用if语句</h2>
+<p>if语句可以嵌套使用，实现多级（层）的条件判断（<strong>最多127层</strong>）。<br>
+注意：</p>
+<ul>
+<li>else总是与前面最近if配对。</li>
+<li>如果要改变这种配对关系，可以使用花括号来确定新的配对关系。</li>
+</ul>
+<h2 id="三、多条件的if语句">三、多条件的if语句</h2>
+<p>语法：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (表达式一)</span><br><span class="line">{ </span><br><span class="line">    <span class="comment">// 表达式一为真时执行的语句。</span></span><br><span class="line">}</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (表达式二)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// 表达式二为真时执行的语句。</span></span><br><span class="line">}</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (表达式三)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// 表达式三为真时执行的语句。</span></span><br><span class="line">}</span><br><span class="line">……</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (表达式n)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// 表达式n为真时执行的语句。</span></span><br><span class="line">}</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">{</span><br><span class="line">    <span class="comment">// 全部表达式都不为真时执行的语句。</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>注意：</p>
+<ul>
+<li>本质上是嵌套的if语句。</li>
+<li>最多只能有127个条件分支。</li>
+<li>最后一个else可以没有。</li>
+</ul>
+<h2 id="四、三目运算">四、三目运算</h2>
+<p>语法： <code>表达式一 ? 表达式二 : 表达式三</code><br>
+先计算表达式一的值，如果为真，整个表达式的结果为表达式二的值，如果为假，整个表达式的结果为表达式三的值。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a,b,c;</span><br><span class="line">a=<span class="number">7</span>;</span><br><span class="line">b=<span class="number">6</span>;</span><br><span class="line">c=(a&gt;b)?a:b;</span><br></pre></td></tr></tbody></table></figure>
+<p>等同于</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a&gt;b) c=a;</span><br><span class="line"><span class="keyword">else</span> c=b;</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="五、switch语句">五、switch语句</h2>
+<p>switch也是一种选择结构的语句，可以代替简单的多条件的if语句。<br>
+语法：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (表达式)</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">case</span> 值一: </span><br><span class="line">       语句一; </span><br><span class="line">       <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> 值二: </span><br><span class="line">       语句二; </span><br><span class="line">       <span class="keyword">break</span>;</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">case</span> 值n: </span><br><span class="line">       语句n; </span><br><span class="line">       <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">       上述条件都不满足时执行的语句; </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>注意：</p>
+<ul>
+<li>case后面必须是整数和字符，或者是结果为整数和字符的表达式，但<strong>不能使用变量</strong>。</li>
+<li>default不是必须的。</li>
+<li>每个分支<strong>不要漏写break;语句</strong>。</li>
+</ul>
+
+    </section>
+
+    
+        <section class="post-tag">
+            <a href="/tags"><i class="fa fa-tags"></i></a>
+            
+                <a href="/tags/IT%EF%BC%8C-%E5%AD%A6%E4%B9%A0%EF%BC%8C-C/" class="tag-item">
+                    IT， 学习， C++
+                </a>
+            
+        </section>
+    
+    
+        <section class="post-cate">
+            <a href="/categories"><i class="fa fa-inbox"></i></a>
+            
+                <a href="/categories/IT%E6%8A%80%E6%9C%AF/" class="cate-item">
+                    IT技术
+                </a>
+            
+        </section>
+    
+
+    <section class="post-cc">
+        <div class="post-cc-author">
+            <span class="bold">作者：</span><a href="mailto:22232025@zju.edu.cn" title="锐哥">锐哥</a>
+        </div>
+        <div class="post-cc-link">
+            <span class="bold">链接：</span><a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5/">http://needrigor.github.io/2024/01/05/C-学习笔记（3）条件分支语句/</a>
+        </div>
+        <div class="post-cc-source">
+            <span class="bold">来源：</span><a href="/">锐哥的个人空间</a>
+        </div>
+        <div class="ppost-cc-declare">
+            <span class="bold">版权声明: </span>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> 许可协议。著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 
+        </div>
+    </section>
+
+    <section class="flex-between" style="margin: 20px 0;">
+        <div class="pre">
+            
+                <a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/" class="change-link">
+                    <span class="icon"><i class="fa fa-angle-double-left"></i></span>
+                    <span class="text">
+                        <span class="identify">上一篇</span>
+                        <span class="text-title">C++学习笔记（4）循环语句</span>
+                    </span>
+                </a>
+            
+        </div>
+        <div class="next">
+            
+                <a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E3%80%81%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97/" class="change-link">
+                    <span class="text">
+                        <span class="identify" style="text-align: right;">下一篇</span>
+                        <span class="text-title" style="text-align: right;">C++学习笔记（2）算术运算、关系运算</span>
+                    </span>
+                    <span class="icon"><i class="fa fa-angle-double-right"></i></span>
+                </a>
+            
+        </div>
+    </section>
+
+    <!-- comment -->
+    <section class="comment-container">
+        <!-- giscus -->
+        
+    </section>
+</article>
+
+
+
+
+            <section class="article-bottom flex-between">
+                <div class="flex-center">
+                    <img src="/imgs/logo.png" class="logo">
+                    <span>保持好奇</span>
+                </div>
+                <div class="flex-center">
+                    <a href="mailto:22232025@zju.edu.cn">
+                        <span title="envelope">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">
+                        <span title="github" style="font-size: 18px;">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="to-top">
+    <a href="javascript: void(0)" onclick="delicate.toTop()">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <footer>
+        <div class="footer-info gray">
+    <div>
+        <span><a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">Delicate</a> theme designed with ❤️ by <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack">can-dy-jack</a></span>
+    </div>
+    <div>
+        <span>Copyright Ⓒ 2024. All rights reserved.</span>
+    </div>
+</div>
+    </footer>
+
+    
+
+
+<script src="/js/index.js"></script>
+
+
+</body>
+
+</html>

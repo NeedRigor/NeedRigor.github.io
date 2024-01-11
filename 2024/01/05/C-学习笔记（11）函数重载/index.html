@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锐哥的个人空间 | C++学习笔记（11）函数重载</title>
+
+    
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="锐哥">
+
+    <meta name="color-scheme" content="light dark">
+
+    
+    
+<link rel="stylesheet" href="/styles/index.css">
+
+    
+    <link rel="shortcut icon" href="/imgs/logo.png">
+
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/base16/solarized-light.css">
+    
+
+    
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body id="delicate-app">
+    <main>
+        <div class="container">
+            <section class="page-top-badge flex-between w100">
+                <div>
+                    <a href="/">
+                        <span title="github"><i class="fa fa-home" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+                <!-- <div>
+                    
+                </div> -->
+            </section>
+            <aside class="toc-container">
+    <!-- sticky toc -->
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="toc-number">1.</span> <span class="toc-text">一、函数重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">二、内联函数</span></a></li></ol>
+</aside>
+
+<article class="markdown-container">
+    <section>
+        <h1>
+            <span>
+                C++学习笔记（11）函数重载
+            </span>
+        
+            <div class="post-info">
+                <span></span>
+                <span>
+                    10k字 • 
+                    20分钟
+                </span>
+            </div>
+        </h1>
+    </section>
+
+    <section class="article">
+        <h2 id="一、函数重载">一、函数重载</h2>
+<p>函数重载（函数多态）是指  <u><strong>设计一系列同名函数，让它们完成相同（似）的工作</strong></u>。<br>
+C++允许定义名称相同的函数，条件是<strong>它们的特征（形参的个数、数据类型和排列顺序）不同</strong>。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">short</span> a  ,string b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">int</span> a    ,string b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">double</span> a,string b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">int</span> a    ,string b, <span class="type">int</span> len)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(string b , <span class="type">int</span> a)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>调用重载函数的时候，在代码中我们用相同的函数名，但是，后面的实参不一样，编译器根据实参与重载函数的形参进行匹配，然后决定调用具体的函数，如果匹配失败，编译器将视为错误。</p>
+<p>在实际开发中，视需求重载各种数据类型，<strong>不要重载功能不同的函数</strong>。</p>
+<p>注意：</p>
+<ul>
+<li>使用重载函数时，如果数据类型不匹配，C++尝试使用类型转换与形参进行匹配，如果转换后有多个函数能匹配上，编译将报错。</li>
+<li>引用可以作为函数重载的条件，但是，调用重载函数的时候，如果实参是变量，编译器将形参类型的本身和类型引用视为同一特征。</li>
+<li>如果重载函数有默认参数，调用函数时，可能导致匹配失败。</li>
+<li>const不能作为函数重载的特征。</li>
+<li>返回值的数据类型不同不能作为函数重载的特征。</li>
+<li>C++的名称修饰：编译时，对每个函数名进行加密，替换成不同名的函数。</li>
+</ul>
+<figure class="highlight d"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> MyFunctionFoo(<span class="keyword">int</span>,<span class="built_in">float</span>);</span><br><span class="line"><span class="keyword">void</span> MyFunctionFoo(<span class="built_in">long</span>,<span class="built_in">float</span>);</span><br><span class="line">?MyFunctionFoo@<span class="keyword">@YAXH</span>(<span class="keyword">int</span>,<span class="built_in">float</span>);</span><br><span class="line">#<span class="keyword">void</span> MyFunctionFoo^$@(<span class="built_in">long</span>,<span class="built_in">float</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myswap</span><span class="params">(<span class="type">int</span>&amp; a, <span class="type">int</span>&amp; b)</span>     <span class="comment">// 交换两个整型变量的值。</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> tmp = a; a = b; b = tmp;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myswap</span><span class="params">(string&amp; a, string&amp; b)</span>     <span class="comment">// 交换两个字符串变量的值。</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	string tmp = a; a = b; b = tmp;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">5</span>;</span><br><span class="line">	<span class="built_in">myswap</span>(a, b);</span><br><span class="line">	cout &lt;&lt; <span class="string">"a="</span> &lt;&lt; a &lt;&lt; <span class="string">",b="</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	string c = <span class="string">"西施"</span>, d = <span class="string">"西瓜"</span>;</span><br><span class="line">	<span class="built_in">myswap</span>(c, d);</span><br><span class="line">	cout &lt;&lt; <span class="string">"c="</span> &lt;&lt; c &lt;&lt; <span class="string">",d="</span> &lt;&lt; d &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="二、内联函数">二、内联函数</h2>
+<p>C++将内联函数的代码组合到程序中，可以提高程序运行的速度。<br>
+语法：<strong>在函数声明和定义前加上关键字inline</strong>。<br>
+通常的做法是将函数声明和定义写在一起。<br>
+注意：</p>
+<ul>
+<li>内联函数节省时间，但消耗内存。</li>
+<li>如果函数过大，编译器可能不将其作为内联函数。</li>
+<li>内联函数不能递归。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>         <span class="comment">// 包含头文件。</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">show</span><span class="params">(<span class="type">const</span> <span class="type">short</span> bh, <span class="type">const</span> string message)</span>   <span class="comment">// 表白函数。</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	cout &lt;&lt; <span class="string">"亲爱的"</span> &lt;&lt; bh &lt;&lt; <span class="string">"号："</span> &lt;&lt; message &lt;&lt; endl;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="comment">//show(3, "我是一只傻傻鸟。");</span></span><br><span class="line">	{</span><br><span class="line">		<span class="type">int</span> bh = <span class="number">3</span>;</span><br><span class="line">		string message = <span class="string">"我是一只傻傻鸟。"</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">"亲爱的"</span> &lt;&lt; bh &lt;&lt; <span class="string">"号："</span> &lt;&lt; message &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// show(8, "我有一只小小鸟。");</span></span><br><span class="line">	{</span><br><span class="line">		<span class="type">int</span> bh = <span class="number">8</span>;</span><br><span class="line">		string message = <span class="string">"我有一只小小鸟。"</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">"亲爱的"</span> &lt;&lt; bh &lt;&lt; <span class="string">"号："</span> &lt;&lt; message &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">// show(5, "我是一只小小鸟。");</span></span><br><span class="line">	{</span><br><span class="line">		<span class="type">int</span> bh = <span class="number">5</span>;</span><br><span class="line">		string message = <span class="string">"我是一只小小鸟。"</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">"亲爱的"</span> &lt;&lt; bh &lt;&lt; <span class="string">"号："</span> &lt;&lt; message &lt;&lt; endl;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+    </section>
+
+    
+        <section class="post-tag">
+            <a href="/tags"><i class="fa fa-tags"></i></a>
+            
+                <a href="/tags/IT%EF%BC%8C-%E5%AD%A6%E4%B9%A0%EF%BC%8C-C/" class="tag-item">
+                    IT， 学习， C++
+                </a>
+            
+        </section>
+    
+    
+        <section class="post-cate">
+            <a href="/categories"><i class="fa fa-inbox"></i></a>
+            
+                <a href="/categories/IT%E6%8A%80%E6%9C%AF/" class="cate-item">
+                    IT技术
+                </a>
+            
+        </section>
+    
+
+    <section class="post-cc">
+        <div class="post-cc-author">
+            <span class="bold">作者：</span><a href="mailto:22232025@zju.edu.cn" title="锐哥">锐哥</a>
+        </div>
+        <div class="post-cc-link">
+            <span class="bold">链接：</span><a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8811%EF%BC%89%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/">http://needrigor.github.io/2024/01/05/C-学习笔记（11）函数重载/</a>
+        </div>
+        <div class="post-cc-source">
+            <span class="bold">来源：</span><a href="/">锐哥的个人空间</a>
+        </div>
+        <div class="ppost-cc-declare">
+            <span class="bold">版权声明: </span>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> 许可协议。著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 
+        </div>
+    </section>
+
+    <section class="flex-between" style="margin: 20px 0;">
+        <div class="pre">
+            
+                <a href="/2024/01/08/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8814%EF%BC%89C-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" class="change-link">
+                    <span class="icon"><i class="fa fa-angle-double-left"></i></span>
+                    <span class="text">
+                        <span class="identify">上一篇</span>
+                        <span class="text-title">C++学习笔记（14）C++类型转换</span>
+                    </span>
+                </a>
+            
+        </div>
+        <div class="next">
+            
+                <a href="/2024/01/05/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8810%EF%BC%89%E5%BC%95%E7%94%A8/" class="change-link">
+                    <span class="text">
+                        <span class="identify" style="text-align: right;">下一篇</span>
+                        <span class="text-title" style="text-align: right;">C++学习笔记（10）引用</span>
+                    </span>
+                    <span class="icon"><i class="fa fa-angle-double-right"></i></span>
+                </a>
+            
+        </div>
+    </section>
+
+    <!-- comment -->
+    <section class="comment-container">
+        <!-- giscus -->
+        
+    </section>
+</article>
+
+
+
+
+            <section class="article-bottom flex-between">
+                <div class="flex-center">
+                    <img src="/imgs/logo.png" class="logo">
+                    <span>保持好奇</span>
+                </div>
+                <div class="flex-center">
+                    <a href="mailto:22232025@zju.edu.cn">
+                        <span title="envelope">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">
+                        <span title="github" style="font-size: 18px;">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="to-top">
+    <a href="javascript: void(0)" onclick="delicate.toTop()">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <footer>
+        <div class="footer-info gray">
+    <div>
+        <span><a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">Delicate</a> theme designed with ❤️ by <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack">can-dy-jack</a></span>
+    </div>
+    <div>
+        <span>Copyright Ⓒ 2024. All rights reserved.</span>
+    </div>
+</div>
+    </footer>
+
+    
+
+
+<script src="/js/index.js"></script>
+
+
+</body>
+
+</html>
